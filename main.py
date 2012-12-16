@@ -220,7 +220,7 @@ class Main:
 			self.fpsClock.tick(FPS)
 
 # Creates a level object, with the level number as parameter
-level = leveldesign.LevelDesign(7)
+level = leveldesign.LevelDesign(1)
 level.startLevel() # Initiate the level
 main = Main(SCREEN) # Creates the Main Class with SCREEN
 main.loop(FPS) # Loops with n FPS
