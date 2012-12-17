@@ -1,3 +1,13 @@
+# Noir Game
+# A strategy-stealth shooter
+	
+# By Vinicius Castanheira (@viniciusepiplon)
+# This a free software and can be redistributed without charge.
+# All code included can be used for your projects.
+
+# Pyganim is a free module by Al Sweigart (al@inventwithpython.com)
+# for doing simple 2D animation with Pygame.
+
 from pygame import *
 from entity import Entity
 from player import Player

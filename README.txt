@@ -32,7 +32,8 @@ are seeing you and will shoot you at the very moment.
 
 4. Final Considerations:
 	This game was made in less than 2 days for the 25th edition of Ludum Dare.
-All the work was done by myself and the music was composed by my friend. You 
+	The Pyganim module was made by Al Sweigart, to make Pygame animations.
+	All the work was done by myself and the music was composed by my friend. You 
 can find us on the links provided below.
 
 5. Links:
@@ -40,5 +41,6 @@ can find us on the links provided below.
 	Follow me: twitter.com/viniciusepiplon
 	Personal and deving blog: vncastanheira.tumblr.com
 	Friend's website: about.me/hdmj
+	Sweigart's website: al@inventwithpython.com
 
 Thank's for playing! =)

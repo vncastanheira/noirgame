@@ -13,6 +13,8 @@ Special thanks to Heber Junior, for providing
 a great music for this little game. =)
 Follow him at: http://about.me/hdmj
 
+Pyganim module by Al Sweigart (al@inventwithpython.com).
+
 --------
 Runs with:
 --------
