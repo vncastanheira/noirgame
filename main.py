@@ -1,7 +1,7 @@
 # Noir Game
 # A strategy-stealth shooter
 	
-# By Vinicius Castanheira (@viniciusepiplon)
+# By Vinicius Castanheira (vncastanheira@gmail.com)
 # This a free software and can be redistributed without charge.
 # All code included can be used for your projects.
 

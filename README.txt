@@ -40,7 +40,8 @@ can find us on the links provided below.
 	Ludum Dare's Website: http://www.ludumdare.com/compo/
 	Follow me: twitter.com/viniciusepiplon
 	Personal and deving blog: vncastanheira.tumblr.com
+	My e-mail: vncastanheira@gmail.com
 	Friend's website: about.me/hdmj
-	Sweigart's website: al@inventwithpython.com
+	Sweigart's website: inventwithpython.com
 
 Thank's for playing! =)

@@ -4,6 +4,7 @@
 Game made by Vinícius Castanheira for
 the 48th edition of Ludum Dare on December of 2012.
 
+- Gmail: vncastanheira@gmail.com
 - Follow me: @viniciusepiplon (portuguese and english)
 - Personal and deving blog: vncastanheira.tumblr.com (portuguese)
 
