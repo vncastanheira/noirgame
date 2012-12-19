@@ -212,6 +212,16 @@ class Main:
 				self.fontBig.printf(self.mainDisplay,"she is hot.",(20, 180))
 				self.fontBig.printf(self.mainDisplay,"Finally, the money",(20, 210))
 				self.fontBig.printf(self.mainDisplay,"is all yours!",(20, 240))
+			# Taking the money only.
+			if level.boss.alive and level.girl.alive and level.money.taken:
+				self.fontBig.printf(self.mainDisplay,"Dead people makes",(20, 30))
+				self.fontBig.printf(self.mainDisplay,"so much mess!",(20, 60))
+				self.fontBig.printf(self.mainDisplay,"And you do not ",(20, 90))
+				self.fontBig.printf(self.mainDisplay,"want your hands",(20, 120))
+				self.fontBig.printf(self.mainDisplay,"with dirty blood. ",(20, 150))
+				self.fontBig.printf(self.mainDisplay,"You want the money,",(20, 180))
+				self.fontBig.printf(self.mainDisplay,"So better take it",(20, 210))
+				self.fontBig.printf(self.mainDisplay,"and just leave.",(20, 240))
 
 	# Main loop. Everything in order.
 	def loop(self,FPS):
