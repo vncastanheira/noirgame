@@ -1,3 +1,7 @@
+# Copyright Vinicius Castanheira (vncastanheira@gmail.com) - 2012
+#	This program is a part of the Noir Game.
+# This program is under the Gnu LGPL.
+
 import pygame
 import pyganim
 

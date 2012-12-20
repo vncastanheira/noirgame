@@ -1,8 +1,11 @@
-from pygame import *
-
 #	Font Pallet
-# Strings with personalized fonts
-# For PyGame
+# Strings with personalized fonts for Pygame
+	
+# Copyright Vinicius Castanheira (vncastanheira@gmail.com) - 2012
+#	This program is a part of the Noir Game.
+# This program is under the Gnu LGPL.
+
+from pygame import *
 
 class fontPallet(object):
 	# Initializes the object
