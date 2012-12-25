@@ -24,6 +24,8 @@ from player import Player
 from enemy import Enemy
 import leveldesign
 from font_pallet import fontPallet
+from game_jolt_trophy import GameJoltTrophy
+from trophy_ui import TrophyUI
 import pygame._view
 import sys
 
@@ -55,6 +57,18 @@ class Main:
 
 		self.isNextLevel = False
 
+		# Game Jolt Trophies User Interface
+		self.trophyUI = TrophyUI()
+		self.trophyUI.new('girl', ['not_so_fast_sweetheart.png'])
+		self.trophyUI.new('oldman', ['you_lived_too_much.png'])
+		self.trophyUI.new('money', ['no_empty_hands.png'])
+		self.trophyUI.new('gun_light', ['only_a_gun_in_the_light.png'])
+		self.bossTrophySet = False
+		self.girlTrophySet = False
+		self.moneyTrophySet = False
+		self.gunlightTrophySet = False
+
+
 	def playerEvent(self):
 		for eventput in event.get():
 			if eventput.type == KEYDOWN and eventput.key == K_ESCAPE:
@@ -79,6 +93,7 @@ class Main:
 			
 	# Updates variables
 	def update(self):
+		self.trophyUI.update()
 		if level.player.update() == 'NEXTLEVEL':
 			self.isNextLevel = True
 		for each_spotlight in level.spotlightGroup:
@@ -103,10 +118,41 @@ class Main:
 			level.girl.collision(level.player)
 			level.money.collision(level.player)
 
+		# Game Jolt Achievments
+		if self.authSucess:
+			if level.level == 7:
+
+				if level.boss.alive == False:
+					self.trophyUI.activate('oldman')
+					if self.bossTrophySet == False:
+						self.gameJolt.setTrophy('1151')
+						self.bossTrophySet = True
+
+				if level.girl.alive == False:
+					self.trophyUI.activate('girl')
+					if self.girlTrophySet == False:
+						self.gameJolt.setTrophy('1152')
+						self.girlTrophySet = True
+
+				if level.money.taken == True:
+					self.trophyUI.activate('money')
+					if self.moneyTrophySet == False:
+						self.gameJolt.setTrophy('1150')
+						self.moneyTrophySet = True
+
+			if self.playerEvilness >= 240:
+				self.trophyUI.activate('gun_light')
+				if self.gunlightTrophySet == False:
+					self.gameJolt.setTrophy('1149')
+					self.gunlightTrophySet = True
+
+
 
 	# Draws to the screen when finished
 	def draw(self):
 		self.mainDisplay.fill((0,0,0))
+		# Draw trohpies earned
+		self.trophyUI.draw(self.mainDisplay)
 		
 		for each_enemy in level.enemyGroup:
 			each_enemy.draw(self.mainDisplay)
@@ -249,8 +295,100 @@ class Main:
 			display.update()
 			self.fpsClock.tick(FPS)
 
+	# Menu from the game, with buttons and authentication
+	def menu(self):
+		fontBig = fontPallet(8*3,"font_big.png")
+		fontSmall = fontPallet(8,"font_small.png")
+		username = ''
+		user_token = ''
+		usernameInputRect = Rect(200,220, 200, 14)
+		usertokenInputRect = Rect(200,240, 200, 14)
+		authBox = Rect(100, 260, 40, 30)
+		usernameColor = (255,255,255)
+		usertokenColor = (255,255,255)
+		authenticationColor = (255,255,255)
+
+		self.gameJolt = GameJoltTrophy(username, user_token, '11254', 'bc38e5418741cbd796217f97e86523b0')
+		self.authSucess = None
+
+		while True:
+			self.mainDisplay.fill((0,0,0))
+			for eventput in event.get():
+				(x, y) = mouse.get_pos()
+
+				# Esc key
+				if eventput.type == KEYDOWN and eventput.key == K_ESCAPE:
+					quit()
+					sys.exit()
+
+				# Mouse button
+				if eventput.type == MOUSEBUTTONDOWN:
+					(mouseleft, garbage1, garbage2) = mouse.get_pressed()
+					if mouseleft and (x >= 100 and x <= 100+(8*3*len('Start'))) and (y >= 120 and y <= 120+(8*3)):
+						return
+					if mouseleft and (x >= 100 and x <= 100+(8*3*len('Start'))) and (y >= 330 and y <= 330+(8*3)):
+						quit()
+						sys.exit()
+					if mouseleft and (x > 100 and x < 140) and (y >= 260 and y <= 290):
+						self.gameJolt.changeUsername(username)
+						self.gameJolt.changeUserToken(user_token)
+						self.authSucess = self.gameJolt.authenticateUser()
+
+				# Text input field
+				try:
+					if (x > 200 and x < 400) and (y >= 220 and y <= 234):
+						if eventput.unicode != '\b':
+							username += eventput.unicode
+						else:
+							username = username[:-1]
+					if (x > 200 and x < 400) and (y >= 240 and y <= 254):
+						if eventput.unicode != '\b':
+							user_token += eventput.unicode
+						else:
+							user_token = user_token[:-1]
+				except Exception:
+					pass
+
+				# Mouse motion
+				if eventput.type == MOUSEMOTION:
+					if (x > 200 and x < 400) and (y >= 220 and y <= 234):
+						usernameColor = (255, 0, 0)
+					else:
+						usernameColor = (255, 255, 255)
+					if (x > 200 and x < 400) and (y >= 240 and y <= 254):
+						usertokenColor = (255, 0, 0)
+					else:
+						usertokenColor = (255, 255, 255)
+					if (x > 100 and x < 140) and (y >= 260 and y <= 290):
+						authenticationColor = (255, 0, 0)
+					else:
+						authenticationColor = (255,255,255)
+			
+			if self.authSucess == False:
+				fontSmall.printf(self.mainDisplay, "Failed...", (160, 280))
+			elif self.authSucess == True:
+				fontSmall.printf(self.mainDisplay, "Sucess!", (160, 280))
+			else:
+				pass
+
+			fontBig.printf(self.mainDisplay, 'Start', (100,120))
+			fontSmall.printf(self.mainDisplay, 'Login on GameJolt:', (100,200))
+			fontSmall.printf(self.mainDisplay, 'Username', (100, 220))
+			fontSmall.printf(self.mainDisplay, 'User Token', (100, 235))
+			fontSmall.printf(self.mainDisplay, 'OK!', (110, 270))
+			draw.rect(self.mainDisplay, authenticationColor, authBox, 1)
+			fontSmall.printf(self.mainDisplay, username, (200, 222))
+			fontSmall.printf(self.mainDisplay, user_token, (200, 242))
+			draw.rect(self.mainDisplay, usernameColor, usernameInputRect, 1)
+			draw.rect(self.mainDisplay, usertokenColor, usertokenInputRect, 1)
+			fontBig.printf(self.mainDisplay, 'Exit', (100,330))
+			display.update()
+			self.fpsClock.tick(FPS)
+
+
 # Creates a level object, with the level number as parameter
 level = leveldesign.LevelDesign(1)
 level.startLevel() # Initiate the level
 main = Main(SCREEN) # Creates the Main Class with SCREEN
+main.menu()
 main.loop(FPS) # Loops with n FPS
