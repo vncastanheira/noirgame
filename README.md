@@ -1,5 +1,6 @@
 ﻿Noir Game - A 2D stealth-action shooter
 --------
+- Game Jolt Version
 
 Game made by Vinícius Castanheira for
 the 25th edition of Ludum Dare on December of 2012.
@@ -13,6 +14,12 @@ Follow him at: http://about.me/hdmj
 
 Pyganim module by Al Sweigart (al@inventwithpython.com).
 
+Updates:
+- Menu screen with mouse control
+- Authentication on GameJolt*
+- GameJolt Trophies*
+
+* Requires active internet connection.
 --------
 Runs with:
 --------
